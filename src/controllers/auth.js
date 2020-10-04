@@ -8,14 +8,14 @@ const User = require('../models/user');
 // const { JWT_KEY } = process.env;
 const JWT_KEY = "thisissecretkey"
 exports.signup = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const user = await User.create({
-      email,
+      username,
       password: hashedPassword,
     });
 
@@ -29,8 +29,8 @@ exports.signup = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    const barberExists = await barber.exists({ email });
+    const { username, password } = req.body;
+    const barberExists = await barber.exists({ username });
     let isbarber = false;
     if (barberExists) isbarber = true;
 
@@ -53,8 +53,8 @@ const generateUserToken = (userId, userType, expiresIn = '14d') => {
   return jwt.sign(payload, JWT_KEY, { expiresIn });
 };
 
-const loginUser = async (userModel, userType, email, password) => {
-  const user = await userModel.findOne({ email });
+const loginUser = async (userModel, userType, username, password) => {
+  const user = await userModel.findOne({ username });
 
   if (user) {
     const validPassword = await bcrypt.compare(password, user.password);
