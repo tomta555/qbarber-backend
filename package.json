@@ -1,0 +1,22 @@
+{
+  "name": "qbarber",
+  "version": "1.0.0",
+  "description": "Q-Barber back-end",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon ./src/app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "http-status": "^1.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
