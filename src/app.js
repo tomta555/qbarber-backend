@@ -1,5 +1,6 @@
 const express = require('express');
-// const path = require('path');
+const path = require('path');
+const cors = require('cors')
 
 require('./database/mongo');
 const routes = require('./routes');
@@ -7,6 +8,8 @@ const { sendErrorResponse } = require('./helper/api-response');
 const app = express();
 const port = process.env.PORT || 8000;
 
+app.use('/public', express.static(path.join(__dirname,'/public')))
+app.use(cors())
 app.use(express.json({ extended: false }));
 app.use('/api', routes);
 app.get('/', (req, res) => {
