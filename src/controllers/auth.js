@@ -30,9 +30,9 @@ exports.signup = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    const barberExists = await barber.exists({ username });
+    // const barberExists = await barber.exists({ username });
     let isbarber = false;
-    if (barberExists) isbarber = true;
+    // if (barberExists) isbarber = true;
 
     const userModel = isbarber ? barber : User;
     const userType = isbarber ? 'barber' : 'user';

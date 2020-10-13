@@ -85,6 +85,7 @@ exports.getBarbershopQueues = async (req, res, next) => {
   try {
       const filter = { barbershopId:shopId }
       const queues = await Queue.find(filter)
+      .populate('barber_name')
       
       return sendSuccessResponse(res, queues);
     } catch (error) {

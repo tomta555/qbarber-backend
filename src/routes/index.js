@@ -11,6 +11,6 @@ router.use('/auth', authRoutes);
 router.use('/insertdata', insertdataRoutes);
 router.use('/barbershops', barbershopRoutes);
 router.use('/barbers', barberRoutes);
-// router.use('/queues', queueRoutes);
+router.use('/queues', queueRoutes);
 
 module.exports = router;
