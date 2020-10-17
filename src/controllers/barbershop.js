@@ -60,7 +60,7 @@ exports.getBarbershopReviews = async (req, res, next) => {
     const shopId = req.params.shopId;
     try {
         const barbershop = await Barbershop.findById(shopId)
-        .select(`shop_name reviews.user shop_pic descriptions`)
+        .select(`shop_name reviews shop_pic descriptions`)
         .populate('reviews.user','username')
 
     
