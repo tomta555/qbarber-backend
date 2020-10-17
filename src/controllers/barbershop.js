@@ -1,7 +1,9 @@
 const { sendSuccessResponse } = require('../helper/api-response');
+const mongoose = require('mongoose');
 const Barbershop = require('../models/barbershop');
 const Barber = require('../models/barber');
 const Queue = require('../models/queue');
+const ObjectId = mongoose.Types.ObjectId;
 
 exports.getBarbershop = async (req, res, next) => {
     const search = req.query.search;
@@ -102,6 +104,27 @@ exports.addQueue = async (req, res, next) => {
         { new: true })
       
       return sendSuccessResponse(res, queue);
+    } catch (error) {
+      next(error);
+    }
+};
+
+exports.addReview = async (req, res, next) => {
+  const shopId = req.params.shopId;
+  const userId = req.body.userId;
+  const rating = req.body.rating;
+  const comment = req.body.comment;
+  const review_add = {
+      'user':userId,
+      'rating':rating,
+      'comment':comment
+    }
+  try {
+      const review = await Barbershop.findByIdAndUpdate(shopId, 
+        { $push: {"reviews": review_add} }, 
+        { new: true })
+      
+      return sendSuccessResponse(res, review);
     } catch (error) {
       next(error);
     }

@@ -10,6 +10,8 @@ router.get('/:shopId/reviews', barbershopController.getBarbershopReviews);
 router.get('/:shopId/barbers', barbershopController.getBarbershopBarbers);
 router.get('/:shopId/queues', barbershopController.getBarbershopQueues);
 
+router.put('/:shopId/review', barbershopController.addReview);
 router.put('/queue/:queueId', barbershopController.addQueue);
+
 
 module.exports = router;
