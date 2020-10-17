@@ -36,7 +36,7 @@ exports.login = async (req, res, next) => {
 
     const userModel = isbarber ? barber : User;
     const userType = isbarber ? 'barber' : 'user';
-    const { token } = await loginUser(userModel, userType, email, password);
+    const { token } = await loginUser(userModel, userType, username, password);
 
     sendSuccessResponse(res, { role: userType, token });
   } catch (error) {
