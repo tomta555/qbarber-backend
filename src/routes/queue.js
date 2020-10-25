@@ -6,5 +6,6 @@ const router = express.Router();
 router.get('/',  queueController.getQueues)
 router.get('/:queueId', queueController.getQueueById);
 
+router.put('/:queueId', queueController.removeFirstQueue);
 
 module.exports = router;

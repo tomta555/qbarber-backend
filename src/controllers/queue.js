@@ -27,3 +27,16 @@ exports.getQueueById = async (req, res, next) => {
         next(error);
       }
 };
+
+exports.removeFirstQueue = async (req, res, next) => {
+  const queueId = req.params.queueId;
+  try {
+    const queue = await Queue.findByIdAndUpdate(queueId, 
+      { $pop: {"customer_name": -1} }, 
+      { new: true })
+    
+    return sendSuccessResponse(res, queue);
+  } catch (error) {
+    next(error);
+  }
+}
