@@ -28,11 +28,18 @@ exports.getQueueById = async (req, res, next) => {
       }
 };
 
-exports.removeFirstQueue = async (req, res, next) => {
+exports.removeQueue = async (req, res, next) => {
   const queueId = req.params.queueId;
+  const name = req.query.name;
+  let filter = {};
   try {
+    if(name){
+      filter = { $pull: {"customer_name": name}};
+    }else{
+      filter = { $pop: {"customer_name": -1} };
+    }
     const queue = await Queue.findByIdAndUpdate(queueId, 
-      { $pop: {"customer_name": -1} }, 
+      filter, 
       { new: true })
     
     return sendSuccessResponse(res, queue);
